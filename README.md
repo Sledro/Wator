@@ -1,8 +1,8 @@
 # Wator
-Software Development Year 4 Project
-Concurrent Device Development Module
-Continous Assessment 1 
-Daniel Hayden & Frank Rooney
+Software Development Year 4 Project<br />
+Concurrent Device Development Module<br />
+Continous Assessment 1<br /> 
+Daniel Hayden & Frank Rooney<br />
 
 Problem:
 

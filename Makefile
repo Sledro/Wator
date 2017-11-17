@@ -3,12 +3,28 @@
 ## Makefile using gcc
 ## GLUT & GLEW for OpenGL
 
-CC=gcc
-CFLAGS=-lX11 -lGL -lGLU -lglut -I. 
-APP=Wator
+CC=g++
+CFLAGS=-c -Wall -std=c++11 
+LDFLAGS=
+LIBFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
+SOURCES=main.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=main
+BINDIR=/usr/bin
 
-build: main.o
-	$(CC) -o $(APP) main.o $(CFLAGS)
+all: $(SOURCES) $(EXECUTABLE)
+        
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@ $(LIBFLAGS)
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@ $(LIBFLAGS)
 
 clean:
-	rm *.o
+	rm *.o $(EXECUTABLE)
+
+install:
+	#install -s $(EXECUTABLE) $(BINDIR)
+	sudo cp -u $(EXECUTABLE) $(BINDIR)
+uninstall:
+	sudo rm $(BINDIR)/$(EXECUTABLE)

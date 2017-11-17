@@ -1,22 +1,49 @@
-    #include <GL/glew.h> // Include the GLEW header file  
-    #include <GL/glut.h> // Include the GLUT header file  
-      
-    void display (void) {  
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f); // Clear the background of our window to red  
-    glClear(GL_COLOR_BUFFER_BIT); //Clear the colour buffer (more buffers later on)  
-    glLoadIdentity(); // Load the Identity Matrix to reset our drawing locations  
-      
-    glFlush(); // Flush the OpenGL buffers to the window  
-    }  
-      
-    int main (int argc, char **argv) {  
-    glutInit(&argc, argv); // Initialize GLUT  
-    glutInitDisplayMode (GLUT_SINGLE); // Set up a basic display buffer (only single buffered for now)  
-    glutInitWindowSize (500, 500); // Set the width and height of the window  
-    glutInitWindowPosition (100, 100); // Set the position of the window  
-    glutCreateWindow ("Wator Ecosystem Simulation"); // Set the title for the window  
-      
-    glutDisplayFunc(display); // Tell GLUT to use the method "display" for rendering  
-      
-    glutMainLoop(); // Enter GLUT's main loop  
-    }  
+// Daniel Hayden & Frank Rooney
+// Date: 17/11/17
+// Makefile using gcc
+// GLUT & GLEW for OpenGL
+
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
+int main()
+{
+    // Create the main window
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+    // Load a sprite to display
+    sf::Texture texture;
+    if (!texture.loadFromFile("cute_image.jpg"))
+        return EXIT_FAILURE;
+    sf::Sprite sprite(texture);
+    // Create a graphical text to display
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+        return EXIT_FAILURE;
+    sf::Text text("Hello SFML", font, 50);
+    // Load a music to play
+    sf::Music music;
+    if (!music.openFromFile("nice_music.ogg"))
+        return EXIT_FAILURE;
+    // Play the music
+    music.play();
+    // Start the game loop
+    while (window.isOpen())
+    {
+        // Process events
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // Close window: exit
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        // Clear screen
+        window.clear();
+        // Draw the sprite
+        window.draw(sprite);
+        // Draw the string
+        window.draw(text);
+        // Update the window
+        window.display();
+    }
+    return EXIT_SUCCESS;
+}

@@ -6,6 +6,7 @@
 
 #include "Grid.h"
 #include "Fish.h"
+#include "Shark.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 using namespace std;
@@ -13,22 +14,24 @@ using namespace std;
 static const int GRID_COLS = 32; //Number of grid columns
 static const int GRID_ROWS = 14; //Number of grid rows
 
-int nSharks = 10;
-int nFish = 25;
-int sBreed = 10;
-int fBreed = 10;
-int starve = 10;
-int threads = 10;
+int nSharks = 10;   //Number of sharks to spawn at launch
+int nFish = 25;     //Number of fish to spawn at launch
+int sBreed = 10;    //Number of time units that pass before a shark can reproduce
+int fBreed = 10;    //Number of time units that pass before a fish can reproduce
+int starve = 10;    //Period of time units a shark can go without food before dying
+int threads = 1;    //Number threads this progrm can create/use
 
-int FISH[GRID_COLS][GRID_ROWS];
+int FISH[GRID_COLS][GRID_ROWS];   //Location of Fish
+int SHARKS[GRID_COLS][GRID_ROWS]; //Location of Sharks
 
 int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(1285, 560), "Wator Ecosystem Simulator");
 
-    Grid grid; //Create a single grid sprite object
-    Fish fish; //Create a single fish sprite object
+    Grid grid;      //Create a single grid sprite object
+    Fish fish;      //Create a single fish sprite object
+    Shark shark;    //Create a single shark sprite object
 
     sf::Sprite GRID[GRID_COLS][GRID_ROWS];
     srand (time (0));  //Makes rand() more random
@@ -45,12 +48,18 @@ int main()
         FISH[rand() % GRID_COLS + 1 ][rand() % GRID_ROWS + 1 ]=1;
     }
 
-    //Print the fish array to console
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-            cout << "" <<FISH[i][j];
+
+    //Fill shark array wih 0's
+    for (int i=0; i<GRID_COLS; i++){
+        for (int j=0; j<GRID_ROWS; j++) {
+            SHARKS[i][j]=0;
         }
-        cout << "" << endl;
+    }
+
+
+    //Enter shark notated by 1's at random locations into the FISH array
+    for (int i=0; i<nSharks; i++){
+        SHARKS[rand() % GRID_COLS + 1 ][rand() % GRID_ROWS + 1 ]=1;
     }
 
 
@@ -62,7 +71,9 @@ int main()
             if(FISH[i][j]==1){
                 GRID[i][j]=fish.getFishSprite();
             }
-            
+            if(SHARKS[i][j]==1){
+                GRID[i][j]=shark.getSharkSprite();
+            }            
         }
     }
 

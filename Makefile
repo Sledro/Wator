@@ -1,13 +1,12 @@
 ## Daniel Hayden & Frank Rooney
 ## Date: 17/11/17
-## Makefile using gcc
-## GLUT & GLEW for OpenGL
+## Makefile using g++
 
 CC=g++
 CFLAGS=-c -Wall -std=c++11 
 LDFLAGS=
 LIBFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
-SOURCES=main.cpp
+SOURCES=main.cpp Grid.h Grid.cpp Fish.h Fish.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 BINDIR=/usr/bin

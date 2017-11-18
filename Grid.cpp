@@ -5,7 +5,7 @@
 
 Grid::Grid(){
 
-    if (!gridTexture.loadFromFile("grid.png"))
+    if (!gridTexture.loadFromFile("images/grid.png"))
     {
        std::cout<<"Error loading grid.png";
     }

@@ -5,7 +5,7 @@
 
 Fish::Fish(){
 
-    if (!fishTexture.loadFromFile("fish.png"))
+    if (!fishTexture.loadFromFile("images/fish.png"))
     {
        std::cout<<"Error loading fish.png";
     }

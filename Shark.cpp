@@ -5,7 +5,7 @@
 
 Shark::Shark(){
 
-    if (!sharkTexture.loadFromFile("shark.png"))
+    if (!sharkTexture.loadFromFile("images/shark.png"))
     {
        std::cout<<"Error loading shark.png";
     }

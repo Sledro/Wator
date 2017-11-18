@@ -20,9 +20,9 @@ int sBreed = 10;    //Number of time units that pass before a shark can reproduc
 int fBreed = 10;    //Number of time units that pass before a fish can reproduce
 int starve = 10;    //Period of time units a shark can go without food before dying
 int threads = 1;    //Number threads this progrm can create/use
-
-int FISH[GRID_COLS][GRID_ROWS];   //Location of Fish
-int SHARKS[GRID_COLS][GRID_ROWS]; //Location of Sharks
+float chronon = 1.0f;    //Number of seconds per chronon (chronon = unit of time in this ecosystem)
+int FISH[GRID_COLS][GRID_ROWS];   //Location/Age of Fish : -1 = No Fish otherwise number = age
+int SHARKS[GRID_COLS][GRID_ROWS];      //Location/Age of Sharks
 
 int main()
 {
@@ -36,10 +36,10 @@ int main()
     sf::Sprite GRID[GRID_COLS][GRID_ROWS];
     srand (time (0));  //Makes rand() more random
 
-    //Fill fish array wih 0's
+    //Fill fish array wih -1's
     for (int i=0; i<GRID_COLS; i++){
         for (int j=0; j<GRID_ROWS; j++) {
-            FISH[i][j]=0;
+           FISH[i][j]=-1;
         }
     }
 
@@ -48,13 +48,6 @@ int main()
         FISH[rand() % GRID_COLS + 1 ][rand() % GRID_ROWS + 1 ]=1;
     }
 
-
-    //Fill shark array wih 0's
-    for (int i=0; i<GRID_COLS; i++){
-        for (int j=0; j<GRID_ROWS; j++) {
-            SHARKS[i][j]=0;
-        }
-    }
 
 
     //Enter shark notated by 1's at random locations into the FISH array
@@ -77,6 +70,16 @@ int main()
         }
     }
 
+    //Do math to set FPS
+    sf::Time timePerFrame = sf::seconds(1.0f / chronon);
+    sf::Time timeSinceLastUpdate = sf::Time::Zero;
+
+    //The clock object keeps the time.
+    sf::Clock clock;
+    clock.restart();
+
+    int timeCounter=0;
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -86,15 +89,29 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        for (int i=0; i<GRID_COLS; i++){
-            for (int j=0; j<GRID_ROWS; j++) {
-                //Set position of sprite to make grid and darw
-                GRID[i][j].setPosition(i * 40,j * 40);
-                window.draw(GRID[i][j]);
+        //Get the time since last update and restart the clock
+        timeSinceLastUpdate += clock.restart();
+
+
+        //Update every every chronon
+        //Only update when on new chronon
+        if (timeSinceLastUpdate > timePerFrame)
+        {
+            window.clear();
+            for (int i=0; i<GRID_COLS; i++){
+                for (int j=0; j<GRID_ROWS; j++) {
+                    //Set position of sprite to make grid and darw
+                    GRID[i][j].setPosition(i * 40,j * 40);
+                    window.draw(GRID[i][j]);
+                }
             }
+
+            timeCounter++;
+            std::cout << timeCounter << endl;
+            window.display();
+
+            //Reset the timeSinceLastUpdate to 0 
+            timeSinceLastUpdate = sf::Time::Zero;
         }
-     
-        window.display();
     }
 }

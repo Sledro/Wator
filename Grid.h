@@ -1,8 +1,10 @@
 // Authors: Daniel Hayden & Frank Rooney
 // Created:15/11/17
-#include <SFML/Graphics.hpp>
 
+#include <SFML/Graphics.hpp>
+#include <iostream>
 using namespace std;
+
 class Grid 
 {
 private:
@@ -12,8 +14,5 @@ private:
 
 public:
     Grid();
-    void start();
-    int getGridCols();
-    int getGridRows();
     sf::Sprite getGridSprite();
 };

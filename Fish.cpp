@@ -1,10 +1,13 @@
+// Authors: Daniel Hayden & Frank Rooney
+// Created:15/11/17
+
 #include "Fish.h"
 
 Fish::Fish(){
 
     if (!fishTexture.loadFromFile("fish.png"))
     {
-       //cout<<"Error loading fish.png";
+       std::cout<<"Error loading fish.png";
     }
     
     fishSprite.setTexture(fishTexture);

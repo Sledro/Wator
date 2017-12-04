@@ -48,7 +48,12 @@ int main()
         FISH[rand() % GRID_COLS + 1 ][rand() % GRID_ROWS + 1 ]=1;
     }
 
-
+    //Fill Shark array wih -1's
+    for (int i=0; i<GRID_COLS; i++){
+        for (int j=0; j<GRID_ROWS; j++) {
+           SHARKS[i][j]=-1;
+        }
+    }
 
     //Enter shark notated by 1's at random locations into the FISH array
     for (int i=0; i<nSharks; i++){

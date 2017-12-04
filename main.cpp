@@ -48,6 +48,14 @@ int main()
         FISH[rand() % GRID_COLS + 1 ][rand() % GRID_ROWS + 1 ]=1;
     }
 
+     //Echo out fish 
+    for (int i=0; i<GRID_ROWS; i++){
+        for (int j=0; j<GRID_COLS; j++) {
+          std::cout << FISH[i][j];
+        }
+        std::cout << endl;
+    }
+
     //Fill Shark array wih -1's
     for (int i=0; i<GRID_COLS; i++){
         for (int j=0; j<GRID_ROWS; j++) {

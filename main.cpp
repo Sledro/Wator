@@ -24,6 +24,9 @@ int threads = 1;    //Number threads this progrm can create/use
 float chronon = 1.0f;    //Number of seconds per chronon (chronon = unit of time in this ecosystem)
 int FISH[GRID_ROWS][GRID_COLS];   //Location/Age of Fish : -1 = No Fish otherwise number = age
 int SHARKS[GRID_ROWS][GRID_COLS];      //Location/Age of Sharks
+int FISHMOVE[GRID_ROWS][GRID_COLS]; // hold a record of each position of weather a fish has been moved there already in the current cycle. 
+int SHARKMOVES[GRID_ROWS][GRID_COLS]; 
+int STARVE[GRID_ROWS][GRID_COLS]; 
 
 int main()
 {
@@ -62,13 +65,7 @@ int main()
         SHARKS[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
     }
 
-    //Echo out Sharks array
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-           std::cout << SHARKS[i][j];
-        }
-        std::cout << endl;
-    }  
+
 
 
     //Fill GRID array with grid sprites
@@ -119,22 +116,31 @@ int main()
                 for (int j=0; j<GRID_COLS; j++) {
                     //Set position of sprite to make grid and darw
                     GRID[i][j].setPosition(j * 40,i * 40);
-
-                   
                     window.draw(GRID[i][j]);
 
-                   // cout << i << " X " << j  << endl;
+                    if(FISH[i][j]!=-1)
+                        FISH[i][j]=timeCounter;
+
                 }
                 
 
             }
+
+
+                //Echo out Sharks array
+            for (int i=0; i<GRID_ROWS; i++){
+                for (int j=0; j<GRID_COLS; j++) {
+                   std::cout << "(" << FISH[i][j] << ") ";
+                }
+                std::cout << endl;
+            }  
 
             timeCounter++;
             //std::cout << timeCounter << endl;
             window.display();
 
             //Reset the timeSinceLastUpdate to 0 
-            //timeSinceLastUpdate = sf::Time::Zero;
+            timeSinceLastUpdate = sf::Time::Zero;
         }
     }
 }

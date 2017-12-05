@@ -50,14 +50,6 @@ int main()
     }
 
 
-      //Fill fish array wih -1's
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-           std::cout << FISH[i][j];
-        }
-        std::cout << endl;
-    }  
-
     //Fill Shark array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
@@ -65,18 +57,30 @@ int main()
         }
     }
 
-    //Enter shark notated by 1's at random locations into the FISH array
+    //Enter shark notated by 1's at random locations into the SHARKS array
     for (int i=0; i<nSharks; i++){
         SHARKS[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
     }
+
+    //Echo out Sharks array
+    for (int i=0; i<GRID_ROWS; i++){
+        for (int j=0; j<GRID_COLS; j++) {
+           std::cout << SHARKS[i][j];
+        }
+        std::cout << endl;
+    }  
 
 
     //Fill GRID array with grid sprites
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
             if(FISH[i][j]!=1){
-            GRID[i][j]=grid.getGridSprite();
-            }else if (FISH[i][j]==1){
+                GRID[i][j]=grid.getGridSprite();
+            }
+            if (SHARKS[i][j]==1){
+                GRID[i][j]=shark.getSharkSprite();      
+            }
+            if (FISH[i][j]==1){
                 GRID[i][j]=fish.getFishSprite();
             }       
         }

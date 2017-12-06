@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "config.h"
 using namespace std;
 
 class Fish 
@@ -14,4 +15,5 @@ private:
 public:
     Fish();
     sf::Sprite getFishSprite();
+    void findMoveLocation(int x, int y);
 };

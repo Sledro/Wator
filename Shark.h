@@ -3,6 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Config.h"
+
 using namespace std;
 
 class Shark 
@@ -14,4 +16,5 @@ private:
 public:
     Shark();
     sf::Sprite getSharkSprite();
+    int SHARKS[GRID_ROWS][GRID_COLS];      //Location/Age of Sharks
 };

@@ -3,17 +3,14 @@
 // Description: This file starts the program and contorls the program
 // it creates the Grid Fish and Shark Objects and preforms logic on them
 // to place them in their correct position on each new chronon
-
+#include <iostream>
 #include "Grid.h"
 #include "Fish.h"
 #include "Shark.h"
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include "Config.h"
 
 using namespace std;
-
-
-
 
 int main()
 {
@@ -30,19 +27,19 @@ int main()
     //Fill fish array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
-           FISH[i][j]=-1;
+           fish.FISH[i][j]=-1;
         }
     }
 
     //Enter fish notated by 1's at random locations into the FISH array
     for (int i=0; i<nFish; i++){
-        FISH[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
+        fish.FISH[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
     }
 
 
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
-          std::cout << FISH[i][j];
+          std::cout << fish.FISH[i][j];
         }
         std::cout << endl;
     }
@@ -50,26 +47,26 @@ int main()
     //Fill Shark array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
-           SHARKS[i][j]=-1;
+           shark.SHARKS[i][j]=-1;
         }
     }
 
-    /*Enter shark notated by 1's at random locations into the SHARKS array
+    //Enter shark notated by 1's at random locations into the SHARKS array
     for (int i=0; i<nSharks; i++){
-        SHARKS[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
-    }*/
+        shark.SHARKS[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
+    }
 
 
     //Fill GRID array with grid sprites
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
-            if(FISH[i][j]!=1){
+            if(fish.FISH[i][j]!=1){
                 GRID[i][j]=grid.getGridSprite();
             }
-            if (SHARKS[i][j]==1){
+            if (shark.SHARKS[i][j]==1){
                 GRID[i][j]=shark.getSharkSprite();      
             }
-            if (FISH[i][j]==1){
+            if (fish.FISH[i][j]==1){
                 GRID[i][j]=fish.getFishSprite();
             }       
         }
@@ -110,8 +107,8 @@ int main()
                     GRID[i][j].setPosition(j * 40,i * 40);
                     window.draw(GRID[i][j]);
 
-                    if(FISH[i][j]!=-1)
-                        FISH[i][j]=timeCounter;
+                    if(fish.FISH[i][j]!=-1)
+                        fish.FISH[i][j]=timeCounter;
 
                      fish.findMoveLocation(i,j);
 
@@ -124,7 +121,7 @@ int main()
                 //Echo out Sharks array
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
-                   std::cout << "(" << FISH[i][j] << ") ";
+                   std::cout << "(" << fish.FISH[i][j] << ") ";
                 }
                 std::cout << endl;
             }  

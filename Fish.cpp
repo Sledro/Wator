@@ -30,7 +30,7 @@ void Fish::findMoveLocation(int x, int y)
 	/*char N;
 	char S;
 	char E;
-	char W;*/
+	char W;
 
 	if (FISH[x-1][y]==1){ //If North
 		cout << "FISH LOCATED NORTH";
@@ -43,6 +43,6 @@ void Fish::findMoveLocation(int x, int y)
 	}
 	if (FISH[x][y-1]==1){ //If North
 		cout << "FISH LOCATED WEST";
-	}
+	}*/
 
 }

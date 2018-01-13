@@ -3,7 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "config.h"
+#include "Config.h"
+
 using namespace std;
 
 class Fish 
@@ -14,6 +15,8 @@ private:
 
 public:
     Fish();
+    int FISH[GRID_ROWS][GRID_COLS];   //Location/Age of Fish : -1 = No Fish otherwise number = age
     sf::Sprite getFishSprite();
     void findMoveLocation(int x, int y);
 };
+

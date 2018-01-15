@@ -62,6 +62,8 @@ void Fish::moveFish(std::vector< char > possibleLocations, int x, int y){
 
 	char loc = possibleLocations[rand];
 
+	cout << "called";
+
 	if(loc=='N'){
 		cout << "Move N  " <<endl;
 	    FISH[x][y]=-1;
@@ -69,19 +71,22 @@ void Fish::moveFish(std::vector< char > possibleLocations, int x, int y){
 		FISHMOVE[x-1][y]=1;
 	}
 	
-	else if(loc=='E'){
+	if(loc=='E'){
 		cout << "Move E  "<<endl;
 	    FISH[x][y]=-1;
 		FISH[x][y+1]=1; //Set fish south of old location
 		FISHMOVE[x][y+1]=1;
+		FISH[x][y]=-1;
 	}
 	
 	else if(loc=='S'){
 		cout << "Move S  "<<endl;
-	     FISH[x][y]=-1;
+	    FISH[x][y]=-1;
 		FISH[x+1][y]=1; //Set fish east of old location
 		FISHMOVE[x+1][y]=1;
+		FISH[x][y]=-1;
 	}
+	
 	else if(loc=='W'){
 		cout << "Move W  "<<endl;
 	    FISH[x][y]=-1;

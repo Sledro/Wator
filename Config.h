@@ -11,7 +11,7 @@
 #define GRID_ROWS 14 //Number of grid rows 14
 
 #define nSharks 4  //Number of sharks to spawn at launch
-#define nFish 1     //Number of fish to spawn at launch
+#define nFish 2     //Number of fish to spawn at launch
 #define sBreed 10    //Number of time units that pass before a shark can reproduce
 #define fBreed 10    //Number of time units that pass before a fish can reproduce
 #define starve 10    //Period of time units a shark can go without food before dying

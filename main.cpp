@@ -105,9 +105,7 @@ int main()
                         GRID[i][j]=fish.getFishSprite();
                     } 
 
-                    //Set position of sprite to make grid and darw
-                    GRID[i][j].setPosition(j * 40,i * 40);
-                    window.draw(GRID[i][j]);       
+                
 
                     if(fish.FISH[i][j]!=-1 && fish.FISHMOVE[i][j]!=1){            
                         fish.FISH[i][j]=timeCounter;
@@ -116,10 +114,7 @@ int main()
                         
                     }
 
-                                       //Set position of sprite to make grid and darw
-                    GRID[i][j].setPosition(j * 40,i * 40);
-                    window.draw(GRID[i][j]);   
-                   
+         
                 
                 }
                
@@ -127,6 +122,25 @@ int main()
             }
                     
 
+                //Fill fish array wih -1's
+            for (int i=0; i<GRID_ROWS; i++){
+                for (int j=0; j<GRID_COLS; j++) {
+
+                    if(fish.FISH[i][j]==-1){
+                        GRID[i][j]=grid.getGridSprite();
+                    }
+                    if (shark.SHARKS[i][j]!=-1){
+                        GRID[i][j]=shark.getSharkSprite();      
+                    }
+                    if (fish.FISH[i][j]!=-1){
+                        GRID[i][j]=fish.getFishSprite();
+                    } 
+
+                            //Set position of sprite to make grid and darw
+                            GRID[i][j].setPosition(j * 40,i * 40);
+                            window.draw(GRID[i][j]);   
+                }
+            }
 
                /* //Echo out Sharks array
             for (int i=0; i<GRID_ROWS; i++){

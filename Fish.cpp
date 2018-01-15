@@ -13,6 +13,7 @@ Fish::Fish(){
     
     fishSprite.setTexture(fishTexture);
     fishSprite.setScale(1, 1);
+	c=0;
 }
 
 sf::Sprite Fish::getFishSprite()
@@ -57,12 +58,9 @@ std::vector< char > Fish::findMoveLocation(int x, int y)
 
 void Fish::moveFish(std::vector< char > possibleLocations, int x, int y){
 
-	srand (time (0)); // makes rand more random
-	int rand=std::rand() % possibleLocations.size(); // Random number between 1- number of possible directions stored in vector.
+	char loc = possibleLocations[std::rand() % possibleLocations.size()];
 
-	char loc = possibleLocations[rand];
-
-	cout << "called";
+	cout << "called" << c;
 
 	if(loc=='N'){
 		cout << "Move N  " <<endl;
@@ -93,5 +91,7 @@ void Fish::moveFish(std::vector< char > possibleLocations, int x, int y){
 		FISH[x][y-1]=1; //Set fish west of old location
 		FISHMOVE[x][y-1]=1;
 	}
+
+	c++;
 
 }

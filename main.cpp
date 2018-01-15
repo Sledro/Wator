@@ -45,8 +45,6 @@ int main()
     }
 
 
-
-
     //Fill Shark array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
@@ -82,7 +80,6 @@ int main()
 
         //Get the time since last update and restart the clock
         timeSinceLastUpdate += clock.restart();
-
 
         //Update every every chronon
         //Only update when on new chronon

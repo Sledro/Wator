@@ -11,6 +11,7 @@
 #include "Config.h"
 
 using namespace std;
+bool lock = true;
 
 int main()
 {
@@ -31,18 +32,20 @@ int main()
         }
     }
 
+    //Fill fish array wih -1's
+    for (int i=0; i<GRID_ROWS; i++){
+        for (int j=0; j<GRID_COLS; j++) {
+           fish.FISHMOVE[i][j]=-1;
+        }
+    }
+
     //Enter fish notated by 1's at random locations into the FISH array
     for (int i=0; i<nFish; i++){
         fish.FISH[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
     }
 
 
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-          std::cout << fish.FISH[i][j];
-        }
-        std::cout << endl;
-    }
+
 
     //Fill Shark array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
@@ -57,23 +60,9 @@ int main()
     }
 
 
-    //Fill GRID array with grid sprites
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-            if(fish.FISH[i][j]!=1){
-                GRID[i][j]=grid.getGridSprite();
-            }
-            if (shark.SHARKS[i][j]==1){
-                GRID[i][j]=shark.getSharkSprite();      
-            }
-            if (fish.FISH[i][j]==1){
-                GRID[i][j]=fish.getFishSprite();
-            }       
-        }
-    }
-
     //Do math to set FPS
-    sf::Time timePerFrame = sf::seconds(1.0f / chronon);
+    // Speed (chronons) can be set in Config.h
+    sf::Time timePerFrame = sf::seconds(1.0f);
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
     //The clock object keeps the time.
@@ -103,28 +92,49 @@ int main()
 
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
+
+
+
+                    if(fish.FISH[i][j]==-1){
+                        GRID[i][j]=grid.getGridSprite();
+                    }
+                    if (shark.SHARKS[i][j]!=-1){
+                        GRID[i][j]=shark.getSharkSprite();      
+                    }
+                    if (fish.FISH[i][j]!=-1){
+                        GRID[i][j]=fish.getFishSprite();
+                    } 
+
                     //Set position of sprite to make grid and darw
                     GRID[i][j].setPosition(j * 40,i * 40);
-                    window.draw(GRID[i][j]);
+                    window.draw(GRID[i][j]);       
 
-                    if(fish.FISH[i][j]!=-1)
+                    if(fish.FISH[i][j]!=-1 && fish.FISHMOVE[i][j]!=1){            
                         fish.FISH[i][j]=timeCounter;
+                        
+                        fish.moveFish(fish.findMoveLocation(i,j), i, j);
+                        
+                    }
 
-                     fish.findMoveLocation(i,j);
-
-                }
+                                       //Set position of sprite to make grid and darw
+                    GRID[i][j].setPosition(j * 40,i * 40);
+                    window.draw(GRID[i][j]);   
+                   
                 
-
+                }
+               
+                
             }
+                    
 
 
-                //Echo out Sharks array
+               /* //Echo out Sharks array
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
-                   std::cout << "(" << fish.FISH[i][j] << ") ";
+                   std::fcout << "(" << fish.FISH[i][j] << ") ";
                 }
                 std::cout << endl;
-            }  
+            } */ 
 
             timeCounter++;
             //std::cout << timeCounter << endl;
@@ -132,6 +142,14 @@ int main()
 
             //Reset the timeSinceLastUpdate to 0 
             timeSinceLastUpdate = sf::Time::Zero;
+
+
+                //Fill fish array wih -1's
+    for (int i=0; i<GRID_ROWS; i++){
+        for (int j=0; j<GRID_COLS; j++) {
+           fish.FISHMOVE[i][j]=-1;
+        }
+    }
         }
     }
 }

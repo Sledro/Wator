@@ -4,11 +4,15 @@ Concurrent Device Development Module<br />
 Continous Assessment 1<br /> 
 Daniel Hayden & Frank Rooney<br /></center>
 
+See more information about the project below the image:
+![My image](https://github.com/Sledro/Wator/blob/master/images/preview.png)
+
+
 # Problem
 
-Re-create the famous Wa-Tor program in Serial C++
+Re-create the famous Wa-Tor program in Serial C++ then Concurrently 
 
-Source: https://github.com/josephkehoe/CDD101/blob/master/Concurrency/project/wator_dewdney%20(1).pdf
+Read the original Wator Project paper here: https://github.com/josephkehoe/CDD101/blob/master/Concurrency/project/wator_dewdney%20(1).pdf
 
 
 # Setup

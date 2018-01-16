@@ -90,8 +90,7 @@ int main()
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
 
-
-
+                    fish.removeStarvedFish(i, j); 
                     if(fish.FISH[i][j]==-1){
                         GRID[i][j]=grid.getGridSprite();
                     }
@@ -100,28 +99,23 @@ int main()
                     }
                     if (fish.FISH[i][j]!=-1){
                         GRID[i][j]=fish.getFishSprite();
-                    } 
-
-                
+                    }               
 
                     if(fish.FISH[i][j]!=-1 && fish.FISHMOVE[i][j]!=1){            
                         fish.FISH[i][j]=timeCounter;
-                        
-                        fish.moveFish(fish.findMoveLocation(i,j), i, j);
+                        fish.removeStarvedFish(i, j);  
+                        fish.moveFish(fish.findMoveLocation(i,j), i, j, timeCounter);  
                         
                     }
-
-         
-                
-                }
-               
-                
+                } 
             }
                     
 
-                //Fill fish array wih -1's
+             
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
+
+                    fish.removeStarvedFish(i, j); 
 
                     if(fish.FISH[i][j]==-1){
                         GRID[i][j]=grid.getGridSprite();
@@ -133,34 +127,28 @@ int main()
                         GRID[i][j]=fish.getFishSprite();
                     } 
 
-                            //Set position of sprite to make grid and darw
-                            GRID[i][j].setPosition(j * 40,i * 40);
-                            window.draw(GRID[i][j]);   
+                    //Set position of sprite to make grid and darw
+                    GRID[i][j].setPosition(j * 40,i * 40);
+                    window.draw(GRID[i][j]); 
+                    fish.FISHMOVE[i][j]=-1;  
                 }
             }
 
-               /* //Echo out Sharks array
+            /* //Echo out Sharks array
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
-                   std::fcout << "(" << fish.FISH[i][j] << ") ";
+                   std::cout << "" << fish.FISH[i][j] << "";
                 }
                 std::cout << endl;
-            } */ 
+            }*/ 
 
             timeCounter++;
-            //std::cout << timeCounter << endl;
+
             window.display();
 
             //Reset the timeSinceLastUpdate to 0 
             timeSinceLastUpdate = sf::Time::Zero;
 
-
-                //Fill fish array wih -1's
-    for (int i=0; i<GRID_ROWS; i++){
-        for (int j=0; j<GRID_COLS; j++) {
-           fish.FISHMOVE[i][j]=-1;
-        }
-    }
         }
     }
 }

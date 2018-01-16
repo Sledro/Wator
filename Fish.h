@@ -17,9 +17,9 @@ public:
     Fish();
     int FISH[GRID_ROWS][GRID_COLS];   //Location/Age of Fish : -1 = No Fish otherwise number = age
     int FISHMOVE[GRID_ROWS][GRID_COLS];
-    int c;
     sf::Sprite getFishSprite();
     std::vector< char > findMoveLocation(int x, int y);
-    void moveFish(std::vector< char > possibleLocations, int x, int y);
+    void moveFish(std::vector< char > possibleLocations, int x, int y, int timeCounter);
+    void removeStarvedFish(int x, int y);
 };
 

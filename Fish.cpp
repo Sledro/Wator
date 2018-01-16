@@ -13,7 +13,6 @@ Fish::Fish(){
     
     fishSprite.setTexture(fishTexture);
     fishSprite.setScale(1, 1);
-	c=0;
 }
 
 sf::Sprite Fish::getFishSprite()
@@ -29,69 +28,52 @@ sf::Sprite Fish::getFishSprite()
 std::vector< char > Fish::findMoveLocation(int x, int y)
 {
 	std::vector< char > arr;
-	arr.clear();
-	//cout << "FISH-> y:" << x << " x:" << y << endl;
 
 	if (FISH[x-1][y]==-1){ //If North
-		//cout << "FISH LOCATED NORTH. y:" << x-1 << " x:" << y-1 << endl;
 		arr.push_back('N');
 	}
 	if (FISH[x+1][y]==-1){ //If East
-		//cout << "FISH LOCATED SOUTH. y:" << x+1 << " x:" << y-1 << endl;
 		arr.push_back('S');
 	}
 	if (FISH[x][y+1]==-1){ //If South
-		//cout << "FISH LOCATED EAST. y:"  << x << " x:" << y+1 << endl;
 		arr.push_back('E');
 	}
 	if (FISH[x][y-1]==-1){ //If West
-		//cout << "FISH LOCATED WEST. y:"  << x << " x:" << y-1 << endl;
 		arr.push_back('W');
 	}
 
-	//cout << "-------------------------------------" << endl;
-
 	return arr;
-
 }
 
 
-void Fish::moveFish(std::vector< char > possibleLocations, int x, int y){
+void Fish::moveFish(std::vector< char > possibleLocations, int x, int y, int timeCounter){
 
-	char loc = possibleLocations[std::rand() % possibleLocations.size()];
+	char randomLocationFromPossible = possibleLocations[std::rand() % possibleLocations.size()];
 
-	cout << "called" << c;
-
-	if(loc=='N'){
-		cout << "Move N  " <<endl;
-	    FISH[x][y]=-1;
-		FISH[x-1][y]=1; //Set fish north of old location	 -1 x =north
-		FISHMOVE[x-1][y]=1;
+	if(randomLocationFromPossible=='N'){
+	    FISH[x][y]=-1; 		//Remove fish from old location 
+		FISH[x-1][y]=timeCounter; 	//Set fish north of old location
+		FISHMOVE[x-1][y]=1;	//Store fish positions that have already been moved in this cycle/chronon
 	}
-	
-	if(loc=='E'){
-		cout << "Move E  "<<endl;
+	else if(randomLocationFromPossible=='E'){
 	    FISH[x][y]=-1;
-		FISH[x][y+1]=1; //Set fish south of old location
+		FISH[x][y+1]=timeCounter; 
 		FISHMOVE[x][y+1]=1;
-		FISH[x][y]=-1;
 	}
-	
-	else if(loc=='S'){
-		cout << "Move S  "<<endl;
+	else if(randomLocationFromPossible=='S'){
 	    FISH[x][y]=-1;
-		FISH[x+1][y]=1; //Set fish east of old location
+		FISH[x+1][y]=timeCounter; 
 		FISHMOVE[x+1][y]=1;
-		FISH[x][y]=-1;
 	}
-	
-	else if(loc=='W'){
-		cout << "Move W  "<<endl;
+	else if(randomLocationFromPossible=='W'){
 	    FISH[x][y]=-1;
-		FISH[x][y-1]=1; //Set fish west of old location
+		FISH[x][y-1]=timeCounter; 
 		FISHMOVE[x][y-1]=1;
 	}
+}
 
-	c++;
-
+void Fish::removeStarvedFish(int x, int y){
+	if(FISH[x][y]>starve){
+		FISH[x][y]=-1;
+	}
 }

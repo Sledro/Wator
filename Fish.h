@@ -21,5 +21,6 @@ public:
     std::vector< char > findMoveLocation(int x, int y);
     void moveFish(std::vector< char > possibleLocations, int x, int y, int timeCounter);
     void removeStarvedFish(int x, int y);
+    void putFishOnMapAtRandomLocations();
 };
 

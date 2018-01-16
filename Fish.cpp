@@ -79,3 +79,14 @@ void Fish::removeStarvedFish(int x, int y){
 		FISH[x][y]=-1;
 	}
 }
+
+void Fish::putFishOnMapAtRandomLocations(){
+    int randomRow = std::rand() % GRID_ROWS + 1;
+    int randomCol = std::rand() % GRID_COLS + 1;
+    if(FISH[randomRow][randomCol]!=1){
+        FISH[randomRow][randomCol]=1;
+    }else{
+        putFishOnMapAtRandomLocations();
+		cout << "rerand";
+    }
+}

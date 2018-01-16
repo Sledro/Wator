@@ -39,9 +39,11 @@ int main()
         }
     }
 
+
+
     //Enter fish notated by 1's at random locations into the FISH array
     for (int i=0; i<nFish; i++){
-        fish.FISH[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
+        fish.putFishOnMapAtRandomLocations();
     }
 
 
@@ -152,3 +154,4 @@ int main()
         }
     }
 }
+

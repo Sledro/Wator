@@ -17,4 +17,8 @@ public:
     Shark();
     sf::Sprite getSharkSprite();
     int SHARKS[GRID_ROWS][GRID_COLS];      //Location/Age of Sharks
+    int SHARKSMOVE[GRID_ROWS][GRID_COLS];
+    void putSharksOnMapAtRandomLocations();
+    std::vector< char > findMoveLocation(int x, int y);
+    void moveShark(std::vector< char > possibleLocations, int x, int y, int timeCounter);
 };

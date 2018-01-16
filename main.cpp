@@ -11,7 +11,6 @@
 #include "Config.h"
 
 using namespace std;
-bool lock = true;
 
 int main()
 {
@@ -23,40 +22,44 @@ int main()
     Shark shark;    //Create a single shark sprite object
 
     sf::Sprite GRID[GRID_ROWS][GRID_COLS];
-    srand (time (0));  //Makes rand() more random
+    srand (time (0));  //Makes rand() more random, only needs to be called once
 
-    //Fill fish array wih -1's
+    //Fill FISH array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
            fish.FISH[i][j]=-1;
         }
     }
 
-    //Fill fish array wih -1's
+    //Fill FISHMOVE array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
            fish.FISHMOVE[i][j]=-1;
         }
     }
 
-
-
     //Enter fish notated by 1's at random locations into the FISH array
     for (int i=0; i<nFish; i++){
         fish.putFishOnMapAtRandomLocations();
     }
 
-
-    //Fill Shark array wih -1's
+    //Fill SHARKS array wih -1's
     for (int i=0; i<GRID_ROWS; i++){
         for (int j=0; j<GRID_COLS; j++) {
            shark.SHARKS[i][j]=-1;
         }
     }
 
+    //Fill SHARKSMOVE array wih -1's
+    for (int i=0; i<GRID_ROWS; i++){
+        for (int j=0; j<GRID_COLS; j++) {
+           shark.SHARKSMOVE[i][j]=-1;
+        }
+    }
+
     //Enter shark notated by 1's at random locations into the SHARKS array
     for (int i=0; i<nSharks; i++){
-        shark.SHARKS[rand() % GRID_ROWS + 1 ][rand() % GRID_COLS + 1 ]=1;
+        shark.putSharksOnMapAtRandomLocations();
     }
 
 
@@ -92,7 +95,14 @@ int main()
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
 
+                    //Sharks eat fish if on same location
+                    if(shark.SHARKS[i][j]!=-1 && fish.FISH[i][j]!=-1){  
+                        fish.FISH[i][j]=-1;
+                    }
+
                     fish.removeStarvedFish(i, j); 
+
+                    //Fill GRID array with grid, shark and fish sprites
                     if(fish.FISH[i][j]==-1){
                         GRID[i][j]=grid.getGridSprite();
                     }
@@ -103,17 +113,25 @@ int main()
                         GRID[i][j]=fish.getFishSprite();
                     }               
 
+                    //Move Fish
                     if(fish.FISH[i][j]!=-1 && fish.FISHMOVE[i][j]!=1){            
                         fish.FISH[i][j]=timeCounter;
                         fish.removeStarvedFish(i, j);  
-                        fish.moveFish(fish.findMoveLocation(i,j), i, j, timeCounter);  
-                        
+                        fish.moveFish(fish.findMoveLocation(i,j), i, j, timeCounter);   
+                    }
+
+                    //Move Sharks
+                    if(shark.SHARKS[i][j]!=-1 && shark.SHARKSMOVE[i][j]!=1){            
+                        shark.SHARKS[i][j]=timeCounter;
+                        shark.moveShark(shark.findMoveLocation(i,j), i, j, timeCounter);   
                     }
                 } 
             }
                     
 
-             
+            //This loop preforms the same tasks as the one above but is needed
+            //to be called again to update the grid after the fish and shark movements
+            //are made. (updates the entire grid quicker to stop an issue where old fish/sharks were displayed)            
             for (int i=0; i<GRID_ROWS; i++){
                 for (int j=0; j<GRID_COLS; j++) {
 
@@ -133,16 +151,9 @@ int main()
                     GRID[i][j].setPosition(j * 40,i * 40);
                     window.draw(GRID[i][j]); 
                     fish.FISHMOVE[i][j]=-1;  
+                    shark.SHARKSMOVE[i][j]=-1;  
                 }
             }
-
-            /* //Echo out Sharks array
-            for (int i=0; i<GRID_ROWS; i++){
-                for (int j=0; j<GRID_COLS; j++) {
-                   std::cout << "" << fish.FISH[i][j] << "";
-                }
-                std::cout << endl;
-            }*/ 
 
             timeCounter++;
 
@@ -154,4 +165,3 @@ int main()
         }
     }
 }
-

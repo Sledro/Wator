@@ -14,7 +14,7 @@
 #define nFish 2     //Number of fish to spawn at launch
 #define sBreed 10    //Number of time units that pass before a shark can reproduce
 #define fBreed 10    //Number of time units that pass before a fish can reproduce
-#define starve 10    //Period of time units a shark can go without food before dying
+#define starve 500    //Period of time units a shark can go without food before dying
 #define threads 1    //Number threads this progrm can create/use
 #define chronon 1    //Number of seconds per chronon (chronon = unit of time in this ecosystem)
 

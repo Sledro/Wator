@@ -3,7 +3,7 @@
 ## Makefile using g++
 
 CC=g++
-CFLAGS=-g -c -Wall -std=c++11 
+CFLAGS=-g -c -Wall -std=c++11
 LDFLAGS=
 LIBFLAGS=-lsfml-graphics -lsfml-window -lsfml-system
 SOURCES=main.cpp Grid.h Grid.cpp Fish.h Fish.cpp Shark.h Shark.cpp

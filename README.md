@@ -37,3 +37,14 @@ This will add the libraries to your HDD and allow you to comiple the Wator progr
 To compile the program, open the repo in the command prompt and type "make"
 
 To clean/remove the object files type "make clean"
+
++# chmod 755 ./profile.sh first to run this file via command line
++# This file will clean, build and run the program and produce a valgrind profiling report
++# on compleation the valgrind report can be viewed with kcachegrind GUI tool
++# To install profiling tools:
++
++# sudo apt-get update
++# sudo apt install valgrind
++# sudo apt install kcachegrind
+
+see profile.sh for more info

@@ -32,8 +32,25 @@ $ sudo cp -r share/SFML /usr/share<br />
 This will add the libraries to your HDD and allow you to comiple the Wator program.
 
 
-# Run
+# Run Program
 
 To compile the program, open the repo in the command prompt and type "make"
 
 To clean/remove the object files type "make clean"
+
+To run the program once compiled, type "./main"
+
+# To install profiling tools:
+
+sudo apt-get update<br />
+sudo apt install valgrind<br />
+sudo apt install kcachegrind<br />
+<br />
+see profile.sh for more info<br />
+
+# To run the profiling tools:
+
+chmod 755 ./profile.sh first to run this file via command line.<br />
+Enter "./profile.sh" in the terminal to run<br />
+This file will clean, build and run the program and produce a valgrind profiling report<br />
+on compleation the valgrind report can be viewed with kcachegrind GUI tool<br />

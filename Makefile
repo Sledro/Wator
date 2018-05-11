@@ -10,6 +10,7 @@ SOURCES=main.cpp Grid.h Grid.cpp Fish.h Fish.cpp Shark.h Shark.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=main
 BINDIR=/usr/bin
+DOXYGEN = doxygen
 
 all: $(SOURCES) $(EXECUTABLE)
         
@@ -27,3 +28,6 @@ install:
 	sudo cp -u $(EXECUTABLE) $(BINDIR)
 uninstall:
 	sudo rm $(BINDIR)/$(EXECUTABLE)
+
+docs: 
+	$(DOXYGEN) Doxyfile

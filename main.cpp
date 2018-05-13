@@ -9,12 +9,13 @@
 #include "Shark.h"
 #include <SFML/Graphics.hpp>
 #include "Config.h"
+#include<omp.h> //OpenMP added
 
 using namespace std;
 
 int main()
 {
-
+#pragma omp parallel for num_threads(THREADS)
     sf::RenderWindow window(sf::VideoMode(1360, 560), "Wator Ecosystem Simulator");//1285, 560
 
     Grid grid;      //Create a single grid sprite object

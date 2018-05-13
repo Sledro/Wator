@@ -10,6 +10,8 @@
 
 #define GRID_ROWS 14 //Number of grid rows 14
 
+#define THREADS 4 //Number of grid columns 34
+
 #define nSharks 15  //Number of sharks to spawn at launch
 #define nFish 10     //Number of fish to spawn at launch
 #define sBreed 10    //Number of time units that pass before a shark can reproduce

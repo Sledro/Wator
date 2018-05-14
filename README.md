@@ -54,3 +54,7 @@ chmod 755 ./profile.sh first to run this file via command line.<br />
 Enter "./profile.sh" in the terminal to run<br />
 This file will clean, build and run the program and produce a valgrind profiling report<br />
 on compleation the valgrind report can be viewed with kcachegrind GUI tool<br />
+
+# Branches
+Master = Serial
+Multithreadded = Parallel 
